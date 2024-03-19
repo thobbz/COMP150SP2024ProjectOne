@@ -1,8 +1,8 @@
 from typing import List
 
-from Character import Character
-from Event import Event
-from Location import Location
+from project_code.src.Character import Character
+from project_code.src.Event import Event
+from project_code.src.Location import Location
 
 
 class Game:

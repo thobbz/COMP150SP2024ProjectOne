@@ -1,19 +1,19 @@
+# main.py
 import sys
-
-from UserInputParser import UserInputParser
-from InstanceCreator import InstanceCreator
-from Game import Game
-from User import User
-
+from project_code.src.UserInputParser import UserInputParser
+from project_code.src.InstanceCreator import InstanceCreator
+from project_code.src.UserFactory import UserFactory
 
 def start_game():
     parser = UserInputParser()
-    response: str = parser.parse("Would you like to start a new game? (yes/no)")
+    user_factory = UserFactory()
+    instance_creator = InstanceCreator(user_factory, parser)
+
+    response = parser.parse("Would you like to start a new game? (yes/no)")
     print(f"Response: {response}")
-    instance_creator: InstanceCreator = InstanceCreator(parser)
-    user: User = instance_creator.get_user_info(response)
+    user = instance_creator.get_user_info(response)
     if user is not None:
-        game_instance: Game = user.current_game
+        game_instance = user.current_game
         if game_instance is not None:
             response = game_instance.start_game()
             if response == "Save and quit":
@@ -26,7 +26,6 @@ def start_game():
     else:
         print("See you next time!")
         sys.exit()
-
 
 if __name__ == '__main__':
     start_game()

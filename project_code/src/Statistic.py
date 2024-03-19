@@ -1,5 +1,5 @@
-import math
 import random
+
 
 class Statistic:
     def __init__(self, legacy_points: int):
