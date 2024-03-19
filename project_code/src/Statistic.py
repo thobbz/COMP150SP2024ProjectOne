@@ -25,7 +25,7 @@ class Statistic:
         """Generate a starting value for the statistic based on random number and user properties."""
         """This is just a placeholder for now. Perhaps some statistics will be based on user properties, and others 
         will be random."""
-        return legacy_points % 100 + random.randint(1, 3)
+        return legacy_points / 100 + random.randint(1, 3)
 
 
 class Strength(Statistic):
