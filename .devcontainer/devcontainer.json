@@ -1,5 +1,5 @@
 {
-    "name": "Your Project Name",
+    "name": "COMP150SP2024ProjectOne",
     "image": "mcr.microsoft.com/devcontainers/python:3.11",
     "settings": { 
         "terminal.integrated.shell.linux": "/bin/bash"
