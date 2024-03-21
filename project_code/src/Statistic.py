@@ -34,4 +34,58 @@ class Strength(Statistic):
         super().__init__(value)
         self.description = "Strength is a measure of physical power."
 
-# and so on for the other statistics
+class Dexterity(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Dexterity measures agility, coordination, and quickness."
+
+class Constitution(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Constitution represents the body's resilience and natural armor."
+
+class Vitality(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Vitality reflects overall health and energy levels."
+
+class Endurance(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Endurance determines how quickly the body recovers from fatigue and injuries."
+
+class Intelligence(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Intelligence measures mental acuity, problem-solving abilities, and knowledge."
+
+class Wisdom(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Wisdom reflects a character's insight, intuition, and decision-making skills."
+
+class Knowledge(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Knowledge represents the breadth and depth of a character's understanding."
+
+class Willpower(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Willpower measures mental strength, resistance to control, and self-discipline."
+
+class Spirit(Statistic):
+    def __init__(self, value):
+        super().__init__(value)
+        self.description = "Spirit represents the ability to perform otherworldly acts and learn new skills."
+
+class Capacity(Statistic):
+    def __init__(self, value, capacity_type):
+        super().__init__(value)
+        self.capacity_type = capacity_type
+        self.description = f"Capacity for {capacity_type} abilities."
+
+# Example usage:
+# strength_stat = Strength(10)
+# print(strength_stat.value)  # Output: 10
+# print(strength_stat.description)  # Output: Strength is a measure of physical power.
