@@ -31,6 +31,15 @@ class Game:
 
     def _initialize_game(self):
         """Initialize the game with characters, locations, and events based on the user's properties."""
+        character_list = [Character() for _ in range(10)]
+        location_list = [Location() for _ in range(2)]
+
+        for character in character_list:
+            self.add_character()
+
+        for location in location_list:
+            self.add_location()
+            
         pass
 
     def start_game(self):
@@ -39,6 +48,17 @@ class Game:
     def _main_game_loop(self):
         """The main game loop."""
         while self.continue_playing:
+            self.current_location = self.locaation[0]
+            self.current_event = self.current_location.getEvent()
+
+            self.current_event.execute()
+
+            if self.party is None:
+                #award legacy points
+                self.continue_playing = False
+                return "Save and quit. Ciao!"
+            else:
+                continue
             pass
             # ask for user input
             # parse user input
