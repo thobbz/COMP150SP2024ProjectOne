@@ -18,9 +18,31 @@ class Character:
         - Spirit: Catchall for ability to perform otherworldly acts. High spirit is rare. Different skills have different resource pools they might use like mana, stamina, etc. These are unaffected by spirit. Instead spirit is a measure of how hard it is to learn new otherworldly skills and/or master general skills.
          """
         self.name = self._generate_name() if name is None else name
-        self.strength: Strength = Strength(self)
+        self.strength: Strength = Strength(self, base_value=8)
+        self.dexterity: Dexterity = Dexterity(self, base_value=9)
+        self.constitution: Constitution = Constitution(self, base_value=7)
+        self.vitality: Vitality = Vitality(self, base_value=10)
+        self.endurance: Endurance = Endurance(self, base_value=8)
+        self.intelligence: Intelligence = Intelligence(self, base_value=9)
+        self.wisdom: Wisdom = Wisdom(self, base_value=7)
+        self.knowledge: Knowledge = Knowledge(self, base_value=8)
+        self.willpower: Willpower = Willpower(self, base_value=8)
+        self.spirit: Spirit = Spirit(self, base_value=7)
         # etc
         # self.intelligence: Intelligence = Intelligence(self)
 
     def _generate_name(self):
-        return "Bob"
+        return "Spider-Man"
+    
+spider_man = Character(name="Spider-Man")
+print(spider_man.name)
+print(spider_man.strength.base_value)
+print(spider_man.dexterity.base_value)
+print(spider_man.constitution.base_value)
+print(spider_man.vitality.base_value)
+print(spider_man.endurance.base_value)
+print(spider_man.intelligence.base_value)
+print(spider_man.wisdom.base_value)
+print(spider_man.knowledge.base_value)
+print(spider_man.willpower.base_value)
+print(spider_man.spirit.base_value)
