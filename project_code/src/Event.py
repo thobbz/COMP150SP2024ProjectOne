@@ -1,5 +1,5 @@
 class Event:
-    def __init__(self, parser):
+    def __init__(self, parser, data: dict = None):
         self.fail = {
             "message": "You failed."
         }

@@ -4,4 +4,6 @@ I joined the project today and I am commiting this to say that I worked yesterda
 
 Events Method:
     2nd parser method to get a choice
-    
+
+- Creating Events from Static files
+- Storing and Loading user and game information from a file
