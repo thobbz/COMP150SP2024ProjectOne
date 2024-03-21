@@ -34,15 +34,6 @@ class Strength(Statistic):
         super().__init__(value)
         self.description = "Strength is a measure of physical power."
 
- class Statistic:
-    def __init__(self, value):
-        self.value = value
-
-class Strength(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Strength is a measure of physical power."
-
 class Dexterity(Statistic):
     def __init__(self, value):
         super().__init__(value)
