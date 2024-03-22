@@ -3,6 +3,7 @@ import json
 import sys
 from typing import List
 import random
+from enum import Enum
 
 
 class Location:
@@ -26,7 +27,6 @@ class Location:
 
 
 
-from enum import Enum
 
 
 class EventStatus(Enum):
@@ -82,9 +82,10 @@ class Event:
             # if they don't overlap, the character fails
             # if one overlap, the character partially passes
             # if they do overlap, the character passes
-
+            pass
 
 class Character:
+
     def __init__(self, name: str = None):
         """
         Core Stats: Everyone has these ad some text
@@ -230,7 +231,7 @@ class InstanceCreator:
         else:
             return self.user_factory.create_user(self.parser)
 
-    def get_user_info(self, response: str) -> User | None:
+    def get_user_info(self, response: str) -> User:
         if "yes" in response:
             return self._new_user_or_login()
         else:
