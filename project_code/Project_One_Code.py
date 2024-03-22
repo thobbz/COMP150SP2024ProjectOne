@@ -116,7 +116,35 @@ class Character:
         # self.intelligence: Intelligence = Intelligence(self)
 
     def _generate_name(self):
-        return "Bob"
+        #return "Spider-Man"
+        names = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Henry"] #A list of random name choices that can be changed
+        return random.choice(names)
+    
+spider_man = Character(name="Spider-Man")
+print(spider_man.name)
+print(spider_man.strength.base_value)
+print(spider_man.dexterity.base_value)
+print(spider_man.constitution.base_value)
+print(spider_man.vitality.base_value)
+print(spider_man.endurance.base_value)
+print(spider_man.intelligence.base_value)
+print(spider_man.wisdom.base_value)
+print(spider_man.knowledge.base_value)
+print(spider_man.willpower.base_value)
+print(spider_man.spirit.base_value)
+
+Thor = Character(name="Thor")
+print(Thor.name)
+print(Thor.strength.base_value)
+print(Thor.dexterity.base_value)
+print(Thor.constitution.base_value)
+print(Thor.vitality.base_value)
+print(Thor.endurance.base_value)    
+print(Thor.intelligence.base_value)
+print(Thor.wisdom.base_value)
+print(Thor.knowledge.base_value)
+print(Thor.willpower.base_value)
+print(Thor.spirit.base_value)
 
 
 class Game:
