@@ -1,4 +1,5 @@
 # User.py
+import json
 from project_code.src.Game import Game
 
 class User:
@@ -15,4 +16,10 @@ class User:
         return new_game
 
     def save_game(self):
+        #implement saving game state
+        #save game state to a file
+        game_state = self.current_game.get_state()
+
+        with open(f"{self.username}_game_state.json", "w") as file:
+            json.dump(game_state, file)
         pass

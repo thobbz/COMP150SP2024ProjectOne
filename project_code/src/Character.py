@@ -122,6 +122,13 @@ class Character:
         elif character_type == "Rocket":
             self.increase_stat("dexterity", 4)
             self.increase_stat("intelligence", 3)
+        elif character_type == "Winter Soldier":
+            self.increase_stat("strength", 3)
+            self.increase_stat("dexterity", 2)
+            self.increase_stat("constitution", 2)
+            self.increase_stat("endurance", 3)
+            self.increase_stat("willpower", 2)
+            self.increase_stat("knowledge", 1)
         elif character_type == "thanos":
             self.increase_stat("strength", 5)
             self.increase_stat("vitality", 5)
@@ -423,6 +430,22 @@ print("Knowledge:", rocket.knowledge.base_value)
 print("Willpower:", rocket.willpower.base_value)
 print("Spirit:", rocket.spirit.base_value)
 
+winter_soldier = Character(name="Bucky Barnes", character_type="Winter Soldier")
+print("Winter Soldier's stats:")
+print("Name:", winter_soldier.name)
+print("Character Type:", winter_soldier.character_type)
+print("Strength:", winter_soldier.strength.base_value)
+print("Dexterity:", winter_soldier.dexterity.base_value)
+print("Constitution:", winter_soldier.constitution.base_value)
+print("Vitality:", winter_soldier.vitality.base_value)
+print("Endurance:", winter_soldier.endurance.base_value)
+print("Intelligence:", winter_soldier.intelligence.base_value)
+print("Wisdom:", winter_soldier.wisdom.base_value)
+print("Knowledge:", winter_soldier.knowledge.base_value)
+print("Willpower:", winter_soldier.willpower.base_value)
+print("Spirit:", winter_soldier.spirit.base_value)
+
+
 thanos = Character(name="Thanos", character_type="Thanos")
 print("Thanos's stats:")
 print("Name:", thanos.name)
@@ -439,9 +462,9 @@ print("Willpower:", thanos.willpower.base_value)
 print("Spirit:", thanos.spirit.base_value)
 
 
-def generate_random_character():
-    character_type = random.choice["Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Scarlet Witch", "Captain Marvel", "Black Panther", "Doctor Strange", "Spiderman", "Antman", "Wasp", "Falcon", "Nwoye", "Nebula", "Star-Lord", "Groot", "Rocket", "Thanos"]
+character_types = ["Iron Man", "Captain America", "Thor", "Hulk", "Black Widow", "Hawkeye", "Scarlet Witch", "Captain Marvel", "Black Panther", "Doctor Strange", "Spiderman", "Antman", "Wasp", "Falcon", "Nwoye", "Nebula", "Star-Lord", "Groot", "Rocket", "Thanos"]
 
+def generate_random_character():
     random_name = "Random Character"  # Generate random name
     random_type = "random.choice(character_types)"  # Generate random type
 
@@ -472,9 +495,4 @@ print("Spirit:", random_character.spirit.base_value)
 #Create default characters in a character_list that will be randomly rolled when starting a new game.
 #Maybe a legacy perk is being able to recruit a unique custom character with random attributes and either custom name or random name
 #Maybe default characters are legacy
-
-def create_character():
-    character_list = []
-    random_character = Character()
-    character_list.append(Character())
 

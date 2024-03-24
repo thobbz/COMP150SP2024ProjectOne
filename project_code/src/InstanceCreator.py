@@ -24,4 +24,12 @@ class InstanceCreator:
             return None
 
     def _load_user(self) -> User:
+        username = self.parser.parse("Enter your username:")
+      
+        if username in self.user_factory.users:
+            return self.user_factory.users[username]
+        else:
+            print("User not found. Please try again or create a new account.")
+            return None
+    
         pass
