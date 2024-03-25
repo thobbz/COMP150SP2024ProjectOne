@@ -1,3 +1,4 @@
+
 class UserInputParser:
 
     def __init__(self):

@@ -1,4 +1,4 @@
-from project_code.src.Statistic import *
+import Statistic
 import random
 
 class Character:
