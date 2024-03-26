@@ -447,94 +447,6 @@ class InstanceCreator:
             return None
         
 
-class Statistic:
-    def __init__(self, legacy_points: int):
-        self.value = self._generate_starting_value(legacy_points)
-        self.description = None
-        self.min_value = 0
-        self.max_value = 100
-
-    def __str__(self):
-        return f"{self.value}"
-
-    def increase(self, amount):
-        self.value += amount
-        if self.value > self.max_value:
-            self.value = self.max_value
-
-    def decrease(self, amount):
-        self.value -= amount
-        if self.value < self.min_value:
-            self.value = self.min_value
-
-    def _generate_starting_value(self, legacy_points: int):
-        """Generate a starting value for the statistic based on random number and user properties."""
-        """This is just a placeholder for now. Perhaps some statistics will be based on user properties, and others 
-        will be random."""
-        value = legacy_points / 100 + random.randint(1, 3)
-        return value
-
-
-class Strength(Statistic):
-    def __init__(self, value: int):
-        super().__init__(value)
-        self.description = "Strength is a measure of physical power."
-
-class Dexterity(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Dexterity measures agility, coordination, and quickness."
-
-class Constitution(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Constitution represents the body's resilience and natural armor."
-
-class Vitality(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Vitality reflects overall health and energy levels."
-
-class Endurance(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Endurance determines how quickly the body recovers from fatigue and injuries."
-
-class Intelligence(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Intelligence measures mental acuity, problem-solving abilities, and knowledge."
-
-class Wisdom(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Wisdom reflects a character's insight, intuition, and decision-making skills."
-
-class Knowledge(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Knowledge represents the breadth and depth of a character's understanding."
-
-class Willpower(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Willpower measures mental strength, resistance to control, and self-discipline."
-
-class Spirit(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
-        self.description = "Spirit represents the ability to perform otherworldly acts and learn new skills."
-
-class Capacity(Statistic):
-    def __init__(self, value, capacity_type):
-        super().__init__(value)
-        self.capacity_type = capacity_type
-        self.description = f"Capacity for {capacity_type} abilities."
-
-# Example usage:
-# strength_stat = Strength(10)
-# print(strength_stat.value)  # Output: 10
-# print(strength_stat.description)  # Output: Strength is a measure of physical power.
 
 
 class User:
@@ -562,6 +474,23 @@ def start_game():
     instance_creator = InstanceCreator(user_factory, parser)
 
     response = parser.parse("Would you like to start a new game? (yes/no)")
+    introduction = (f"The Mad Titan's wake of destruction has left the universe in ruins.\n"
+                f"Thanos, drunk on power after finally collecting all six Infinity Stones,\n"
+                f"has used their combined might to reshape reality itself to his twisted vision.\n"
+                f"Planets have been turned to dust, civilizations erased in an instant.\n\n"
+                f"Those who remain are a scattered few - the last survivors of Thanos' genocidal rebalancing.\n"
+                f"The few heroes left, those who dared to oppose his insane crusade, have regrouped and gone into hiding.\n"
+                f"All seems lost against such unspeakable power. The Infinity Stones, once the universe's most dangerous weapons when split apart,\n"
+                f"are now united as one under Thanos' iron grip.\n\n"
+                f"But a rally cry has sounded from the ashes. A band of unlikely fighters has pledged to undertake an inconceivable mission -\n"
+                f"to infiltrate Thanos' impregnable fortress, overpower his elite forces, and wrestle the Infinity Stones from his grasp.\n"
+                f"Outnumbered and outmatched, this ragtag squad of the universe's last defenders has pinned their hopes on one desperate objective:\n"
+                f"To reverse the snap that decimated all life and stop the Mad Titan's reign before he remakes the cosmos in his nightmarish image.\n\n"
+                f"The risks are immeasurable, the costs invaluable. But without betting it all, there is no chance of victory...\n"
+                f"and no future across the entire universe. The time to rally has come at last!")
+    
+    print(introduction)
+    user = 1
     print(f"Response: {response}")
     user = instance_creator.get_user_info(response)
     if user is not None:
@@ -570,15 +499,14 @@ def start_game():
             response = game_instance.start_game()
             if response == "Save and quit":
                 user.save_game()
-                print("Game saved. Goodbye!")
+                print("Timeline stabilized. Farewell heroes!")
                 sys.exit()
             elif response:
                 print("Goodbye!")
                 sys.exit()
     else:
-        print("See you next time!")
+        print("Whatever it takes...we'll see each other again.")
         sys.exit()
-
 
 if __name__ == '__main__':
     start_game()
