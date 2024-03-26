@@ -80,7 +80,7 @@ class Event:
         self.partial_pass = {
                 "message": "You partially passed."
             }
-        self.prompt_text = "Thanos appears, what will you do?"
+        self.prompt_text = "Thanos appears! Prepare to attack."
 
         def execute(self, party):
             chosen_one = self.parser.select_party_member(party)
@@ -363,9 +363,9 @@ class Game:
         """The main game loop."""
         while self.continue_playing:
             self.current_location = self.locations[0]
-            # self.current_event = self.current_location.getEvent()
+            self.current_event = self.current_location.events[0]
 
-            # self.current_event.execute()
+            self.current_event.execute()
 
             if self.party is None:
                 # award legacy points
