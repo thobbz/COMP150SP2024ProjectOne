@@ -3,9 +3,9 @@ from project_code.src.Event import Event #import Event class from Event.py
 
 
 class Location:
-    def __init__(self, parser,number_of_events: int = 1):
+    def __init__(self, parser, number_of_events: int = 1):
         self.parser = parser
-        self.events = [Event(self.parser) for _ in range(number_of_events)]
+        self.events = [Event() for _ in range(number_of_events)]
 
     def create_custom_event_from_static_text_file(self, file_path: str):
         """json files will be stored like this:
@@ -26,3 +26,4 @@ class Location:
             self.events.append(event)
     
     pass
+

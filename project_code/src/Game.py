@@ -1,8 +1,7 @@
 import random
-from typing import List
-
+from typing import List 
 from project_code.src.Character import Character
-from project_code.src.Event import Event
+from project_code.src.Event import Event, EventParser, EventStatus
 from project_code.src.Location import Location
 
 
@@ -48,7 +47,7 @@ class Game:
             self.add_event(Event(event_name))
 
         self.current_location = random.choice(self.locations)
-        pass
+       
 
     def start_game(self):
         return self._main_game_loop()
@@ -61,28 +60,43 @@ class Game:
             print("Current event:", self.current_event.name if self.current_event else "None")
 
             if all(character.is_dead for character in self.party):
-                # award legacy points and end instance of game
+                print("Game Over. Awarding legacy points.")
                 self.continue_playing = False
                 return "Game Over"
 
-            pass
-            # ask for user input
-            # parse user input
-            # update game state
-            # check if party is all dead
-            # if party is dead, award legacy points and end instance of game
-            # if party is not dead, continue game
-        if not self.continue_playing:
-            return True
-        elif self.continue_playing == "Save and quit":
-            return "Save and quit"
-        else:
-            return False
+            user_input = input("Enter your choice: ")
+            self.update_game_state(user_input)
+
+            if user_input == "Save and quit":
+                self.continue_playing = False
+                return "Save and quit"
+            
+        return True
 
     def update_game_state(self, user_input):
-        pass
+        if self.current_event:
+            
+            try:
+                chosen_character_index = int(user_input) - 1
+                if chosen_character_index < 0 or chosen_character_index >= len(self.party):
+                    raise ValueError("Invalid character index.")
+                chosen_character = self.party[chosen_character_index]   
+            except ValueError:
+                print("Invalid input. Please enter a number corresponding to a party member.")
+                return
 
+        user_choice = self.event_parser.parse_event(self.current_event)
+        self.current_event.execute(self.party, chosen_character)
 
+        # Update the current event based on the user's choice and event resolution
+        if self.current_event.status == EventStatus.FAILED:
+            print("The event was failed. Applying consequences...")
+            # Apply consequences for failing the event
+        elif self.current_event.status == EventStatus.PARTIAL_SUCCESS:
+            print("The event was partially successful. Applying partial consequences...")
+            # Apply partial consequences for the event
+        elif self.current_event.status == EventStatus.SUCCESS:
+            print("The event was successful. Applying rewards...")
 
 
 

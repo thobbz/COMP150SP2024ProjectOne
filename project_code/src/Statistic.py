@@ -22,68 +22,70 @@ class Statistic:
             self.value = self.min_value
 
     def _generate_starting_value(self, legacy_points: int):
-        """Generate a starting value for the statistic based on random number and user properties."""
-        """This is just a placeholder for now. Perhaps some statistics will be based on user properties, and others 
-        will be random."""
+        """Generate a starting value for the statistic."""
+        """This is just a placeholder for now."""
         return legacy_points / 100 + random.randint(1, 3)
 
 
 class Strength(Statistic):
-
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Strength is a measure of physical power."
+        self.max_value = 20
 
 class Dexterity(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Dexterity measures agility, coordination, and quickness."
+        self.max_value = 20
 
 class Constitution(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Constitution represents the body's resilience and natural armor."
+        self.max_value = 20
 
 class Vitality(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Vitality reflects overall health and energy levels."
+        self.max_value = 20
 
 class Endurance(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Endurance determines how quickly the body recovers from fatigue and injuries."
+        self.max_value = 20
 
 class Intelligence(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Intelligence measures mental acuity, problem-solving abilities, and knowledge."
+        self.max_value = 20
 
 class Wisdom(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Wisdom reflects a character's insight, intuition, and decision-making skills."
+        self.max_value = 20
 
 class Knowledge(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Knowledge represents the breadth and depth of a character's understanding."
+        self.max_value = 20
 
 class Willpower(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Willpower measures mental strength, resistance to control, and self-discipline."
+        self.max_value = 20
 
 class Spirit(Statistic):
-    def __init__(self, value):
-        super().__init__(value)
+    def __init__(self, legacy_points: int):
+        super().__init__(legacy_points)
         self.description = "Spirit represents the ability to perform otherworldly acts and learn new skills."
-
-class Capacity(Statistic):
-    def __init__(self, value, capacity_type):
-        super().__init__(value)
-        self.capacity_type = capacity_type
-        self.description = f"Capacity for {capacity_type} abilities."
+        self.max_value = 20
 
 # Example usage:
 # strength_stat = Strength(10)
