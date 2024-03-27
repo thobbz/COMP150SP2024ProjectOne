@@ -1,15 +1,15 @@
 import unittest
 from unittest.mock import MagicMock
-from project_code.src.InstanceCreator import InstanceCreator
-from project_code.src.UserFactory import UserFactory
-from project_code.src.UserInputParser import UserInputParser
-from project_code.src.User import User
+from project_code.src.instancecreator import InstanceCreator
+from project_code.src.userfactory import UserFactory
+from project_code.src.userinputparser import UserInputParser
+from project_code.src.user import User
 
 class TestInstanceCreator(unittest.TestCase):
     def setUp(self):
         self.mock_user_factory = MagicMock(spec=UserFactory)
         self.mock_parser = MagicMock(spec=UserInputParser)
-        self.instance_creator = InstanceCreator(self.mock_user_factory, self.mock_parser)
+        self.instance_`creator = InstanceCreator(self.mock_user_factory, self.mock_parser)
 
     def test_get_user_info_yes_creates_new_user(self):
         # Prepare the mock objects

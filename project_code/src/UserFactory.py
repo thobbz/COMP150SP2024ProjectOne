@@ -1,6 +1,6 @@
 # UserFactory.py
-from project_code.src.UserInputParser import UserInputParser
-from project_code.src.User import User
+from project_code.src.userinputparser import UserInputParser
+from project_code.src.user import User
 
 
 class UserFactory:

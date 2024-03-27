@@ -5,6 +5,9 @@ from typing import List
 import random
 from enum import Enum
 
+class Skill:
+    def __init__(self, attributes: int):
+        self.attributes = attributes
 
 
 class Location:
@@ -20,9 +23,6 @@ class Location:
         else:
             return None
 
-
-    import json
-
     def create_custom_event_from_static_text_file(self, file_path):
         # load json file from path
         with open(file_path, "r") as file:
@@ -35,13 +35,6 @@ class Location:
 
 
 
-
-
-class EventStatus(Enum):
-    UNKNOWN = "unknown"
-    PASS = "pass"
-    FAIL = "fail"
-    PARTIAL_PASS = "partial_pass"
 
 class EventStatus(Enum):
     UNKNOWN = "unknown"
@@ -82,45 +75,46 @@ class Event:
             }
         self.prompt_text = "Thanos appears! Prepare to attack."
 
-        def execute(self, party):
-            chosen_one = self.parser.select_party_member(party)
-            chosen_skill = self.parser.select_skill(chosen_one)
+    def set_status(self, status: EventStatus = EventStatus.UNKNOWN):
+        self.status = status
 
+    def resolve_choice(self, party, character, chosen_skill):
+        # check if the skill attributes overlap with the event attributes
+        # if they don't overlap, the character fails
+        # if one overlap, the character partially passes
+        # if they do overlap, the character passes
+        # Get the attributes of the chosen skill
+        skill_attributes = chosen_skill.attributes
+        
+        # Get the attributes of the event
+        event_attributes = {
+            "primary": self.primary,
+            "secondary": self.secondary,
+            # Add other attributes here
+        }
+        
+        # Check if any skill attribute overlaps with event attributes
+        overlap = False
+        for attribute in skill_attributes:
+            if attribute in event_attributes.values():
+                overlap = True
+                break
+        
+        # Resolve the outcome based on overlap
+        if not overlap:
+            self.set_status(EventStatus.FAIL)
+        elif overlap and len(set(skill_attributes) & set(event_attributes.values())) == 1:
+            self.set_status(EventStatus.PARTIAL_PASS)
+        else:
             self.set_status(EventStatus.PASS)
-            pass
 
-        def set_status(self, status: EventStatus = EventStatus.UNKNOWN):
-            self.status = status
+    def execute(self, party):
+        chosen_one = self.parser.select_party_member(party)
+        chosen_skill = self.parser.select_skill(chosen_one)
 
-        def resolve_choice(self, party, character, chosen_skill):
-            # check if the skill attributes overlap with the event attributes
-            # if they don't overlap, the character fails
-            # if one overlap, the character partially passes
-            # if they do overlap, the character passes
-            # Get the attributes of the chosen skill
-            skill_attributes = chosen_skill.attributes
-            
-            # Get the attributes of the event
-            event_attributes = {
-                "primary": self.primary,
-                "secondary": self.secondary,
-                # Add other attributes here
-            }
-            
-            # Check if any skill attribute overlaps with event attributes
-            overlap = False
-            for attribute in skill_attributes:
-                if attribute in event_attributes.values():
-                    overlap = True
-                    break
-            
-            # Resolve the outcome based on overlap
-            if not overlap:
-                self.set_status(EventStatus.FAIL)
-            elif overlap and len(set(skill_attributes) & set(event_attributes.values())) == 1:
-                self.set_status(EventStatus.PARTIAL_PASS)
-            else:
-                self.set_status(EventStatus.PASS)
+        self.set_status(EventStatus.PASS)
+        pass
+
 
 class Statistic:
     def __init__(self, legacy_points: int):
@@ -239,12 +233,19 @@ class Character:
         self.knowledge = Knowledge(value=random.randint(1, 10))
         self.willpower = Willpower(value=random.randint(1, 10))
         self.spirit = Spirit(value=random.randint(1, 10))
+        self.skills = [
+            Skill("Power Attack", [self.strength, self.constitution]),
+            Skill("Precise Strike", [self.dexterity, self.intelligence]),
+                # Add more skills as needed
+                ]
+        # ...
+
 
         
         # etc
         # self.intelligence: Intelligence = Intelligence(self)
 
-    def _generate_name(gender=None, initials=None, length=None):
+    def _generate_name(self, gender=None, initials=None, length=None):
         #return "Spider-Man"
         import random
         import string
@@ -278,11 +279,12 @@ class Character:
         return full_name
 
         # Function to generate multiple random names
-    def generate_random_names(num_names, gender=None, initials=None, length=None):
+    def generate_random_names(self, num_names, gender=None, initials=None, length=None):
         random_names = []
         for _ in range(num_names):
             random_names.append(Character._generate_name(gender, initials, length))
         return random_names
+    
 
         # Example usage
         # num_names_to_generate = 5
@@ -362,21 +364,38 @@ class Game:
     def _main_game_loop(self):
         """The main game loop."""
         while self.continue_playing:
+            if not self.locations:
+                print("No locations available. Exiting game loop.")
+                break
+
             self.current_location = self.locations[0]
-            self.current_event = self.current_location.events[0]
 
-            self.current_event.execute()
-
-            if self.party is None:
-                # award legacy points
-                self.continue_playing = False
-                return "Save and quit"
-            else:
+            if not self.current_location.events:
+                print(f"No events available in {self.current_location}. Skipping to the next location.")
                 continue
-        if self.continue_playing is False:
+
+            self.current_event = self.current_location.get_event()
+
+            if self.current_event:
+                self.current_event.execute(self.party)
+
+                if self.current_event.status == EventStatus.FAIL:
+                    print(self.current_event.fail["message"])
+                    # award legacy points or handle failure
+                    self.continue_playing = False
+                    return "Save and quit"
+                elif self.current_event.status == EventStatus.PASS:
+                    print(self.current_event.pass_["message"])
+                    # handle success
+                elif self.current_event.status == EventStatus.PARTIAL_PASS:
+                    print(self.current_event.partial_pass["message"])
+                    # handle partial success
+            else:
+                print("No events available. Exiting game loop.")
+                break
+
+        if not self.continue_playing:
             return True
-        elif self.continue_playing == "Save and quit":
-            return "Save and quit"
         else:
             return False
 
@@ -387,15 +406,17 @@ class User:
         self.username = username
         self.password = password
         self.legacy_points = legacy_points
-        self.current_game = self._get_retrieve_saved_game_state_or_create_new_game()
         self.parser = parser
+        self.current_game = self._get_retrieve_saved_game_state_or_create_new_game()
 
     def _get_retrieve_saved_game_state_or_create_new_game(self) -> Game:
         new_game = Game(self.parser)
         return new_game
 
-    def save_game(self):
-        pass
+    def save_game(self, game_state: dict):
+        with open(f"{self.username}_game_state.json", "w") as file:
+            json.dump(game_state, file)
+            print("Game saved successfully.")
 
 
 class UserInputParser:
@@ -406,6 +427,39 @@ class UserInputParser:
     def parse(self, prompt) -> str:
         response: str = input(prompt)
         return response
+
+    def select_party_member(self, party):
+        print("Select a party member:")
+        for i, member in enumerate(party, start=1):
+            print(f"{i}. {member.name}")
+
+        while True:
+            choice = self.parse("Enter the number of your choice: ")
+            try:
+                choice = int(choice)
+                if 1 <= choice <= len(party):
+                    return party[choice - 1]
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+    def select_skill(self, character):
+        skills = character.skills  # Assuming there is a 'skills' attribute in the Character class
+        print(f"Select a skill for {character.name}:")
+        for i, skill in enumerate(skills, start=1):
+            print(f"{i}. {skill.name}")
+
+        while True:
+            choice = self.parse("Enter the number of your choice: ")
+            try:
+                choice = int(choice)
+                if 1 <= choice <= len(skills):
+                    return skills[choice - 1]
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
 
 class UserFactory:
@@ -449,26 +503,9 @@ class InstanceCreator:
 
 
 
-class User:
-
-    def __init__(self, parser, username: str, password: str, legacy_points: int = 0):
-        self.username = username
-        self.password = password
-        self.legacy_points = legacy_points
-        self.parser = parser
-        self.current_game = self._get_retrieve_saved_game_state_or_create_new_game()
-
-    def _get_retrieve_saved_game_state_or_create_new_game(self) -> Game:
-        new_game = Game(self.parser)
-        return new_game
-
-    def save_game(self, game_state: dict):
-        with open(f"{self.username}_game_state.json", "w") as file:
-            json.dump(game_state, file)
-            print("Game saved successfully.")
 
 
-def start_game():
+def start_game(self):
     parser = UserInputParser()
     user_factory = UserFactory()
     instance_creator = InstanceCreator(user_factory, parser)
@@ -490,7 +527,6 @@ def start_game():
                 f"and no future across the entire universe. The time to rally has come at last!")
     
     print(introduction)
-    user = 1
     print(f"Response: {response}")
     user = instance_creator.get_user_info(response)
     if user is not None:

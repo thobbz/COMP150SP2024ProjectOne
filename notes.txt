@@ -11,3 +11,22 @@ Events Method:
 Theme = Marvel (Infinity War/ Endgame Movie)
 
 I did not have time to work on the project today (3/22)
+
+Notes:
+
+- Do NOT do it in one file.
+- Name the python files lowercase and avoid saying the same as the class
+- Circular imports
+from Class(a) import Class(b)       from Class(b) import Class(b)
+    Class(A)                            Class(B)
+        __init__                            __init__
+        self.class.                         self.class.
+
+Both of them are trying to initialize the other during their own initialization
+
+1. Completely eliminate dependency on each other
+2. Class C that loads first
+
+User input parsing class is IDEAL for json and webapi Part 2 of project.
+Good enough if you can load a user and get legacy points
+ - csv is better than json but both still work
