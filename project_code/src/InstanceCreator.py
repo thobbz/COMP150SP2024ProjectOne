@@ -1,7 +1,7 @@
 # InstanceCreator.py
-from project_code.src.User import User
-from project_code.src.UserFactory import UserFactory
-from project_code.src.UserInputParser import UserInputParser
+from project_code.src.user import User
+from project_code.src.userfactory import UserFactory
+from project_code.src.userinputparser import UserInputParser
 
 
 class InstanceCreator:
@@ -31,5 +31,4 @@ class InstanceCreator:
         else:
             print("User not found. Please try again or create a new account.")
             return None
-    
         pass

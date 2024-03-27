@@ -1,6 +1,5 @@
-from Statistic import Strength, Dexterity, Constitution, Vitality, Endurance, Intelligence, Wisdom, Knowledge, Willpower, Spirit
+from project_code.src.statistic import *
 import random
-
 
 class Character:
 
@@ -474,4 +473,17 @@ print("Knowledge:", random_character.knowledge.value)
 print("Willpower:", random_character.willpower.value)
 print("Spirit:", random_character.spirit.value)
 
+      
+
+#Create a function that will randomly generate a character with random attributes
+
+
+#Create default characters in a character_list that will be randomly rolled when starting a new game.
+#Maybe a legacy perk is being able to recruit a unique custom character with random attributes and either custom name or random name
+#Maybe default characters are legacy
+
+def create_character():
+    character_list = []
+    random_character = Character()
+    character_list.append(Character())
 

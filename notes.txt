@@ -30,3 +30,5 @@ Both of them are trying to initialize the other during their own initialization
 User input parsing class is IDEAL for json and webapi Part 2 of project.
 Good enough if you can load a user and get legacy points
  - csv is better than json but both still work
+
+ I did not have time to work a lot on the project today 3/27
