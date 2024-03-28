@@ -52,6 +52,22 @@ class Game:
             return "Save and quit"
         else:
             return False
+        
+
+    def get_state(self) -> dict:
+        """
+        Returns the current state of the game as a dictionary.
+        """
+        state = {
+            "characters": [char.__dict__ for char in self.characters],
+            "locations": [loc.__dict__ for loc in self.locations],
+            "events": [event.__dict__ for event in self.events],
+            "party": [char.__dict__ for char in self.party],
+            "current_location": self.current_location.__dict__ if self.current_location else None,
+            "current_event": self.current_event.__dict__ if self.current_event else None,
+            "continue_playing": self.continue_playing
+        }
+        return state
 
 
 
