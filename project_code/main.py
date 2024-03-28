@@ -37,4 +37,3 @@ if __name__ == '__main__':
     def __init__(self, user_factory, parser):
         self.user_factory = user_factory
         self.parser = parser
-        
