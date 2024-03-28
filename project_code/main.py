@@ -33,4 +33,8 @@ def start_game():
 if __name__ == '__main__':
     start_game()
 
-
+#nothing to see here
+    def __init__(self, user_factory, parser):
+        self.user_factory = user_factory
+        self.parser = parser
+        
