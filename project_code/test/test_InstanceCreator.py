@@ -9,7 +9,7 @@ class TestInstanceCreator(unittest.TestCase):
     def setUp(self):
         self.mock_user_factory = MagicMock(spec=UserFactory)
         self.mock_parser = MagicMock(spec=UserInputParser)
-        self.instance_`creator = InstanceCreator(self.mock_user_factory, self.mock_parser)
+        self.instance_creator = InstanceCreator(self.mock_user_factory, self.mock_parser)
 
     def test_get_user_info_yes_creates_new_user(self):
         # Prepare the mock objects
@@ -70,7 +70,7 @@ class TestEventMethods(unittest.TestCase):
         # Mock character and skill attributes for testing
         party = ['Character1', 'Character2']
         character = Character(name="TestCharacter")
-        chosen
+        chosen_skill = 
 
 class TestLocationMethods(unittest.TestCase):
     def setUp(self):
