@@ -44,7 +44,7 @@ class EventStatus(Enum):
 
 class Event:
 
-    def __init__(self, parser, data: dict = None):
+    def __init__(self, parser, data: dict = {}):
         self.parser = parser
 
         # Initialize attributes from data or with default values
@@ -208,7 +208,7 @@ class Capacity(Statistic):
 
 class Character:
 
-    def __init__(self, name: str = None):
+    def __init__(self, name: str = ""):
         """
         Core Stats: Everyone has these ad some text
         - Strength: How much you can lift. How strong you are. How hard you punch, etc.

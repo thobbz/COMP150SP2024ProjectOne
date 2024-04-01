@@ -10,7 +10,7 @@ class InstanceCreator:
         self.user_factory = user_factory
         self.parser = parser
 
-    def _new_user_or_login(self) -> User:
+    def _new_user_or_login(self) -> User | None:
         response = self.parser.parse("Create a new username or login to an existing account?")
         if "login" in response:
             return self._load_user()
@@ -23,12 +23,10 @@ class InstanceCreator:
         else:
             return None
 
-    def _load_user(self) -> User:
+
+    def _load_user(self) -> User | None:
         username = self.parser.parse("Enter your username:")
-      
-        if username in self.user_factory.users:
-            return self.user_factory.users[username]
-        else:
+        user = self.user_factory.get_user(username)
+        if user is None:
             print("User not found. Please try again or create a new account.")
-            return None
-        pass
+        return user

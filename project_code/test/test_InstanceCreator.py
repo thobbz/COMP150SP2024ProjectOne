@@ -1,9 +1,17 @@
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 from project_code.src.instancecreator import InstanceCreator
 from project_code.src.userfactory import UserFactory
 from project_code.src.userinputparser import UserInputParser
 from project_code.src.user import User
+from project_code.src.event import Event, EventStatus
+from project_code.src.location import Location
+from project_code.src.character import Character
+from project_code.src.skill import Skill
+from project_code.src.game import Game
+from project_code.src.main import start_game
+import json
+import os
 
 class TestInstanceCreator(unittest.TestCase):
     def setUp(self):

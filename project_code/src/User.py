@@ -23,3 +23,5 @@ class User:
         with open(f"{self.username}_game_state.json", "w") as file:
             json.dump(game_state, file)
         pass
+     
+    

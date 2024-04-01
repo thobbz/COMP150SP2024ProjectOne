@@ -12,3 +12,9 @@ class UserFactory:
         # Here you can add more logic as needed, e.g., validate input
         input = "some_input_value"
         return User(input, username, password)
+    
+    def __init__(self):
+        self.users = {}
+    
+    def get_user(self, username: str) -> User | None:
+        return self.users.get(username)
