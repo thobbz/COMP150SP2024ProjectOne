@@ -2,6 +2,7 @@ import json
 import getpass
 import sys
 import os
+from project_code.src.utils.parser import UserInputParser
 
 # Add the project's root directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -44,9 +45,20 @@ class UserFactory:
         # Here you can add more logic as needed, e.g., validate input
         input = "some_input_value"
         return User(input, username, password)
+<<<<<<< HEAD
        
     def __init__(self):
         self.users = {}
     
     def get_user(self, username: str) -> User | None:
         return self.users.get(username)
+=======
+    
+    def add_user(self, username, user_data):
+        # Add a user to the user manager with the given ID and data
+        self.users[username] = user_data
+
+    def get_user(self, username, password):
+        # Retrieve a user's data based on their ID
+        return self.users.get(username)  # Returns None if user_id is not found
+>>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
