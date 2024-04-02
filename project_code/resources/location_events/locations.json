@@ -1,0 +1,22 @@
+[
+    {
+      "name": "New York City",
+      "description": "The bustling city where the Avengers headquarters is located."
+    },
+    {
+      "name": "Wakanda",
+      "description": "The technologically advanced African nation ruled by Black Panther."
+    },
+    {
+      "name": "Asgard",
+      "description": "The mystical realm of the Asgardians, home to Thor."
+    },
+    {
+      "name": "Titan",
+      "description": "The desolate planet where Thanos resides."
+    },
+    {
+      "name": "Quantum Realm",
+      "description": "A mysterious microscopic universe accessible through quantum mechanics."
+    }
+  ]

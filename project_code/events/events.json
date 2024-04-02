@@ -1,0 +1,82 @@
+[
+    {
+      "description": "Thanos attacks New York City with his army of Chitauri.",
+      "choices": [
+        {
+          "description": "Engage in direct combat with Thanos.",
+          "skill": "strength",
+          "difficulty": 10
+        },
+        {
+          "description": "Evacuate civilians and protect the city.",
+          "skill": "dexterity",
+          "difficulty": 8
+        },
+        {
+          "description": "Develop a strategic plan to counter Thanos.",
+          "skill": "intelligence",
+          "difficulty": 9
+        }
+      ]
+    },
+    {
+      "description": "The Soul Stone is hidden in a secret location on Vormir.",
+      "choices": [
+        {
+          "description": "Sacrifice a loved one to obtain the Soul Stone.",
+          "skill": "willpower",
+          "difficulty": 10
+        },
+        {
+          "description": "Attempt to negotiate with the guardian of the Soul Stone.",
+          "skill": "wisdom",
+          "difficulty": 9
+        },
+        {
+          "description": "Search for an alternative way to acquire the Soul Stone.",
+          "skill": "knowledge",
+          "difficulty": 8
+        }
+      ]
+    },
+    {
+      "description": "The Avengers need to travel back in time to collect the Infinity Stones.",
+      "choices": [
+        {
+          "description": "Use the Quantum Realm to navigate through time.",
+          "skill": "intelligence",
+          "difficulty": 9
+        },
+        {
+          "description": "Seek the help of Doctor Strange to manipulate time.",
+          "skill": "wisdom",
+          "difficulty": 8
+        },
+        {
+          "description": "Build a time machine using advanced technology.",
+          "skill": "knowledge",
+          "difficulty": 10
+        }
+      ]
+    },
+    {
+      "description": "Thanos has acquired all the Infinity Stones and is preparing to snap his fingers.",
+      "choices": [
+        {
+          "description": "Attempt to remove the Infinity Gauntlet from Thanos.",
+          "skill": "strength",
+          "difficulty": 10
+        },
+        {
+          "description": "Use the power of the Infinity Stones against Thanos.",
+          "skill": "spirit",
+          "difficulty": 10
+        },
+        {
+          "description": "Convince Thanos to abandon his plan through reasoning.",
+          "skill": "wisdom",
+          "difficulty": 9
+        }
+      ]
+    }
+  ]
