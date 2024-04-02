@@ -11,13 +11,6 @@ from project_code.src.user_code.user_model import UserFactory
 from project_code.src.core.game import Game
 
 
-# main.py
-from project_code.src.user_code.user_model import UserFactory   
-from project_code.src.core.instancecreator import InstanceCreator     
-from project_code.src.utils.parser import UserInputParser
-from project_code.src.core.game import Game
-
-
 
 
 def start_game():
@@ -27,6 +20,7 @@ def start_game():
     game_instance = Game()
     game_instance.load_locations('locations.json')
     game_instance.load_events('events.json')
+
 
     response = parser.parse("Would you like to start a new game? (yes/no)")
     introduction = (f"The Mad Titan's wake of destruction has left the universe in ruins.\n"
