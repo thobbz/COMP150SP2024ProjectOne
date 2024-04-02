@@ -1,6 +1,10 @@
 import json
-from project_code.src.core.event import Event #import Event class from Event.py
-from project_code.src.eventparser import EventParser #import EventParser class from EventParser.py
+
+import random
+from project_code.src.core.event import Event#import Event class from Event.py
+from project_code.src.eventparser import EventParser#import EventParser class from EventParser.py
+from project_code.src.common.statistic import Statistic, Strength, Dexterity, Spirit, Willpower, Knowledge, Wisdom, Intelligence, Endurance, Vitality, Constitution
+
 
 
 class Location:
@@ -18,17 +22,15 @@ class Location:
         with open(file_path, "r") as file:
             data = json.load(file)
         
-        for event_data in data.values():
-            event = Event(self.parser)
-            event.primary = event_data.get('primary attribute', '')
-            event.prompt_text = event_data.get('prompt_text', '')
-            event.pass_text = event_data.get('pass', {})
-            event.fail_text = event_data.get('fail', {})
-            event.partial_pass_result = event_data.get('partial_pass', {})
-            event.pass_ = event_data.get('pass', '')
-            event.fail = event_data.get('fail', '')
-            event.partial_pass = event_data.get('partial_pass', '')
-            self.events.append(event)
+        event = Event(self.parser)
+        event.primary = Statistic(data.get('primary_attribute', ''))
+        event.secondary = Statistic(data.get('secondary_attribute', ''))
+        event.prompt_text = data.get('prompt_text', '')
+        event.pass_ = data.get('pass', {})
+        event.fail = data.get('fail', {})
+        event.partial_pass = data.get('partial_pass', {})
+            
+        return event
 
 
     def get_event(self, event_id):
@@ -36,4 +38,5 @@ class Location:
         for event in self.events:
             if event.get('id') == event_id:
                 return event
-        return None  # Return None if the event is not found
+        return self.events.pop(0)  # Return None if the event is not found
+
