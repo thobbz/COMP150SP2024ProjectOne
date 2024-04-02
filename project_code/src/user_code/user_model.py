@@ -7,10 +7,11 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from project_code.src.core.game import Game
-
+from project_code.src.utils.parser import UserInputParser
 class User:
 
     def __init__(self, input, username: str, password: str, legacy_points: int = 0):
+        self.parser = UserInputParser
         self.username = username
         self.password = password
         self.legacy_points = legacy_points
@@ -43,3 +44,9 @@ class UserFactory:
         # Here you can add more logic as needed, e.g., validate input
         input = "some_input_value"
         return User(input, username, password)
+       
+    def __init__(self):
+        self.users = {}
+    
+    def get_user(self, username: str) -> User | None:
+        return self.users.get(username)

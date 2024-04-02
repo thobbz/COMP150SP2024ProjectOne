@@ -1,20 +1,18 @@
+import json
 import sys
 import os
-import json
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 from typing import List
-
 from project_code.src.core.character import Character
-from project_code.src.core.event import Event
+from project_code.src.core.event import Event, EventStatus
 from project_code.src.core.location import Location
 
 
 class Game:
 
     def __init__(self):
+        self.continue_playing = True
         self.characters: List[Character] = []
         self.locations: List[Location] = []
         self.events: List[Event] = []
@@ -22,7 +20,7 @@ class Game:
         self.current_location = None
         self.current_event = None
         self._initialize_game()
-        self.continue_playing = True
+        
 
     def add_character(self, character: Character):
         """Add a character to the game."""
@@ -46,13 +44,35 @@ class Game:
     def _main_game_loop(self):
         """The main game loop."""
         while self.continue_playing:
-            pass
-            # ask for user input
-            # parse user input
-            # update game state
-            # check if party is all dead
-            # if part is dead, award legacy points and end instance of game
-            # if party is not dead, continue game
+            if not self.locations:
+                print("No locations available. Exiting game loop.")
+                break
+
+            self.current_location = self.locations[0]
+
+            if not self.current_location.events:
+                print(f"No events available in {self.current_location}. Skipping to the next location.")
+                continue
+
+            self.current_event = self.current_location.get_event()
+
+            if self.current_event:
+                self.current_event.execute(self.party)
+
+                if self.current_event.status == EventStatus.FAIL:
+                    print(self.current_event.fail["message"])
+                    # award legacy points or handle failure
+                    self.continue_playing = False
+                    return "Save and quit"
+                elif self.current_event.status == EventStatus.PASS:
+                    print(self.current_event.pass_["message"])
+                    # handle success
+                elif self.current_event.status == EventStatus.PARTIAL_PASS:
+                    print(self.current_event.partial_pass["message"])
+                    # handle partial success
+            else:
+                print("No events available. Exiting game loop.")
+                break
         if self.continue_playing is False:
             return True
         elif self.continue_playing == "Save and quit":

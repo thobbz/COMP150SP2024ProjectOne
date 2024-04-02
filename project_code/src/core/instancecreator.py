@@ -9,6 +9,7 @@ from project_code.src.user_code.user_model import UserFactory
 from project_code.src.utils.parser import UserInputParser
 
 
+
 class InstanceCreator:
     def __init__(self, user_factory: UserFactory, parser: UserInputParser):
         self.user_factory = user_factory

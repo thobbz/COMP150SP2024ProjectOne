@@ -7,7 +7,7 @@ from project_code.src.common.statistic import Statistic, Strength, Dexterity, Co
 
 class Character:
      
-    def __init__(self, name: str = None, character_type: str = None):
+    def __init__(self, name: str = "", character_type: str = ""):
 
         self.name = self._generate_name() if name is None else name
         legacy_points = 100
