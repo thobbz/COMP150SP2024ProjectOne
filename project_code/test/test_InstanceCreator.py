@@ -5,7 +5,7 @@ from project_code.src.user_code.user_model import UserFactory
 from project_code.src.utils.parser import UserInputParser
 from project_code.src.core.instancecreator import InstanceCreator
 from project_code.src.user_code.user_model import User
-from project_code.src.core.event import Event, EventStatus
+from project_code.src.core.event import Event, EventStatus, EventParser
 from project_code.src.eventparser import EventParser
 from project_code.src.core.location import Location
 from project_code.src.core.character import Character
