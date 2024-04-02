@@ -1,8 +1,17 @@
+<<<<<<< HEAD:project_code/main.py
 import sys
 import os
 from user_input_parser import UserInputParser
 from user_factory import UserFactory
 from instance_creator import InstanceCreator
+=======
+# main.py
+from project_code.src.userinputparser import UserInputParser
+from project_code.src.instancecreator import InstanceCreator
+from project_code.src.userfactory import UserFactory
+from project_code.src.game import Game
+import sys  
+>>>>>>> 1626480dc43301ceba9efdc94b4ec185f93496b8:project_code/src/main.py
 
 
 
@@ -10,6 +19,7 @@ def start_game():
     parser = UserInputParser()
     user_factory = UserFactory()
     instance_creator = InstanceCreator(user_factory, parser)
+    game_instance = Game()
 
     response = parser.parse("Would you like to start a new game? (yes/no)")
     print(f"Response: {response}")
