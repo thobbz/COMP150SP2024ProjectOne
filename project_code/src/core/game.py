@@ -47,6 +47,15 @@ class Game:
         for location in location_list:
             self.add_location(location)
 
+    def load_locations(self, file_path):
+        with open(file_path, 'r') as file:
+            self.locations = json.load(file)
+
+    
+    def load_events(self, file_path):
+            with open(file_path, 'r') as file:
+                self.events = json.load(file)
+
     def start_game(self):
         return self._main_game_loop()
 

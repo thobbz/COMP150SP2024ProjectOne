@@ -25,6 +25,8 @@ def start_game():
     user_factory = UserFactory()
     instance_creator = InstanceCreator(user_factory, parser)
     game_instance = Game()
+    game_instance.load_locations('locations.json')
+    game_instance.load_events('events.json')
 
     response = parser.parse("Would you like to start a new game? (yes/no)")
     print(f"Response: {response}")
