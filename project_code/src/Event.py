@@ -94,15 +94,41 @@ class Event:
     def execute(self, party):
         chosen_one = self.parser.select_party_member(party)
         chosen_skill = self.parser.select_skill(chosen_one)
-        self.resolve_status(party, chosen_one, chosen_skill)    
+        self.resolve_choice(party, chosen_one, chosen_skill)    
         pass
 
     def set_status(self, status: EventStatus = EventStatus.UNKNOWN):
         self.status = status
 
-    def resolve_status(self, party, character, chosen_skill): 
-        # Placeholder logic for resolving event status
-        pass
+    def resolve_choice(self, party, character, chosen_skill):
+        # check if the skill attributes overlap with the event attributes
+        # if they don't overlap, the character fails
+        # if one overlap, the character partially passes
+        # if they do overlap, the character passes
+        # Get the attributes of the chosen skill
+        skill_attributes = chosen_skill.attributes
+        
+        # Get the attributes of the event
+        event_attributes = {
+            "primary": self.primary,
+            "secondary": self.secondary,
+            # Add other attributes here
+        }
+        
+        # Check if any skill attribute overlaps with event attributes
+        overlap = False
+        for attribute in skill_attributes:
+            if attribute in event_attributes.values():
+                overlap = True
+                break
+        
+        # Resolve the outcome based on overlap
+        if not overlap:
+            self.set_status(EventStatus.FAIL)
+        elif overlap and len(set(skill_attributes) & set(event_attributes.values())) == 1:
+            self.set_status(EventStatus.PARTIAL_PASS)
+        else:
+            self.set_status(EventStatus.PASS)
 
 parser = EventParser()
 

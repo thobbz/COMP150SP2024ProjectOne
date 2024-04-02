@@ -4,7 +4,7 @@ from project_code.src.instancecreator import InstanceCreator
 from project_code.src.userfactory import UserFactory
 from project_code.src.userinputparser import UserInputParser
 from project_code.src.user import User
-from project_code.src.event import Event, EventStatus
+from project_code.src.event import Event, EventStatus, EventParser
 from project_code.src.location import Location
 from project_code.src.character import Character
 from project_code.src.skill import Skill
@@ -78,11 +78,11 @@ class TestEventMethods(unittest.TestCase):
         # Mock character and skill attributes for testing
         party = ['Character1', 'Character2']
         character = Character(name="TestCharacter")
-        chosen_skill = 
+        chosen_skill = Skill(attributes=["attribute1", "attribute2"])  # Mock skill attributes
 
 class TestLocationMethods(unittest.TestCase):
     def setUp(self):
-        self.parser = UserInputParser()
+        self.parser = EventParser()
         self.location = Location(self.parser)
 
     def test_create_custom_event_from_static_text_file(self):
