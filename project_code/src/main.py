@@ -3,12 +3,10 @@ import os
 project_code_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(project_code_dir)
 
-
-
-from project_code.src.user_code.user_model import UserFactory
-from project_code.src.core.game import Game
-from .core.instancecreator import InstanceCreator
-from .utils.userinputparser import UserInputParser
+from core.game import Game
+from user_code.user_model import UserFactory
+from core.instancecreator import InstanceCreator
+from utils.userinputparser import UserInputParser
 
 
 
