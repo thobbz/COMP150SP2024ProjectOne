@@ -1,8 +1,10 @@
 import sys
 import os
+project_code_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(project_code_dir)
 
-# Add the project's root directory to the system path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
 
 
 from project_code.src.utils.parser import UserInputParser
