@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import sys
 import os
 import sys
@@ -14,8 +13,6 @@ from project_code.src.core.instancecreator import InstanceCreator
 from project_code.src.user_code.user_model import UserFactory
 from project_code.src.core.game import Game
 
-=======
-
 import sys
 import os
 
@@ -26,7 +23,7 @@ from project_code.src.core.instancecreator import InstanceCreator
 from project_code.src.utils.parser import UserInputParser
 from project_code.src.core.game import Game
 import sys  
->>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
+
 
 
 

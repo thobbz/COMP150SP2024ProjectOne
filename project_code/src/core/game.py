@@ -6,8 +6,9 @@ import os
 from typing import List
 from project_code.src.core.character import Character
 from project_code.src.core.event import Event, EventStatus
+from project_code.src.eventparser import EventParser
 from project_code.src.core.location import Location
-
+from project_code.src.core.locationparser import LocationParser
 
 class Game:
 
@@ -36,7 +37,15 @@ class Game:
 
     def _initialize_game(self):
         """Initialize the game with characters, locations, and events based on the user's properties."""
-        pass
+        event_parser = EventParser()
+        character_list = [Character() for _ in range(10)]
+        location_list = [Location(event_parser) for _ in range(2)]
+
+        for character in character_list:
+            self.add_character(character)
+
+        for location in location_list:
+            self.add_location(location)
 
     def start_game(self):
         return self._main_game_loop()
@@ -54,7 +63,7 @@ class Game:
                 print(f"No events available in {self.current_location}. Skipping to the next location.")
                 continue
 
-            self.current_event = self.current_location.get_event()
+            self.current_event = self.current_location.get_event(0)
 
             if self.current_event:
                 self.current_event.execute(self.party)

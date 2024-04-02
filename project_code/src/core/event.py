@@ -1,15 +1,12 @@
-<<<<<<< HEAD
-=======
 import sys
 import os
 import random
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
->>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
 from typing import List
 from enum import Enum
-from project_code.src.eventparser import EventParser    #import EventParser class from EventParser.py
+from project_code.src.core.event import EventParser    #import EventParser class from EventParser.py
 from project_code.src.common.statistic import Statistic, Strength, Dexterity, Spirit, Willpower, Knowledge, Wisdom, Intelligence, Endurance, Vitality, Constitution
 
 
@@ -19,11 +16,8 @@ class EventStatus(Enum):
     PASS = "PASS"
     PARTIAL_PASS = "PARTIAL_PASS"
 
-<<<<<<< HEAD
 
-class Event:
-    def __init__(self, parser, data: dict = {}):
-=======
+
 class EventParser:
     def __init__(self):
         self.style = "console"
@@ -81,8 +75,7 @@ class EventParser:
 
 class Event:
     def __init__(self, parser, data: dict = {}):
-        self.status = EventStatus.UNKNOWN  
->>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
+        self.status = EventStatus.UNKNOWN  # Initialize the status of the event
         self.parser = parser
         self.choices = []
         self.fail = {
@@ -135,27 +128,21 @@ class Event:
     def initialize_from_data(self, data: dict):
         self.choices = data.get('choices', [])
 
-<<<<<<< HEAD
 
-    def execute(self, party):
-        chosen_one = self.parser.select_party_member(party)
-        chosen_skill = self.parser.select_skill(chosen_one)
-        self.resolve_choice(party, chosen_one, chosen_skill)    
-        pass
-=======
+
     def get(self, attribute_name):
         # Check if the attribute exists and return its value
         if hasattr(self, attribute_name):
             return getattr(self, attribute_name)
         else:
             return None  # Return None if attribute doesn't exist
->>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
+
 
     def set_status(self, status: EventStatus = EventStatus.UNKNOWN):
         self.status = status
 
     def resolve_choice(self, party, character, chosen_skill):
-<<<<<<< HEAD
+
         # check if the skill attributes overlap with the event attributes
         # if they don't overlap, the character fails
         # if one overlap, the character partially passes
@@ -184,7 +171,7 @@ class Event:
             self.set_status(EventStatus.PARTIAL_PASS)
         else:
             self.set_status(EventStatus.PASS)
-=======
+
             # check if the skill attributes overlap with the event attributes
             # if they don't overlap, the character fails
             # if one overlap, the character partially passes
@@ -220,7 +207,7 @@ class Event:
         pass
 
 parser = EventParser()
->>>>>>> bde05581abe9edea3c5f7cca74d871afb86f1624
+
 
 
 
