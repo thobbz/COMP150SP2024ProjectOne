@@ -1,5 +1,6 @@
 import sys
 import os
+import random
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -37,16 +38,39 @@ class EventParser:
                 print("Invalid input. Please enter a number corresponding to the choice.")
 
     def select_party_member(self, party) -> str:
-        # Placeholder logic for selecting party member
-        pass
+        print("Select a party member:")
+        for i, member in enumerate(party, start=1):
+            print(f"{i}. {member.name}")
+
+        while True:
+            try:
+                choice = int(input("Enter the number of the party member: "))
+                if 1 <= choice <= len(party):
+                    return party[choice - 1].name
+                else:
+                    print("Invalid choice. Please enter a valid number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
     def select_skill(self, chosen_one) -> str:
-        # Placeholder logic for selecting skill
-        pass
+        print(f"Select a skill for {chosen_one}:")
+        skills = ["Attack", "Defend", "Use Item"]
+        for i, skill in enumerate(skills, start=1):
+            print(f"{i}. {skill}")
+
+        while True:
+            try:
+                choice = int(input("Enter the number of the skill: "))
+                if 1 <= choice <= len(skills):
+                    return skills[choice - 1]
+                else:
+                    print("Invalid choice. Please enter a valid number.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
 
 class Event:
-    def __init__(self, parser, data: dict = None):
+    def __init__(self, parser, data: dict = {}):
         self.status = EventStatus.UNKNOWN  
         self.parser = parser
         self.choices = []
@@ -66,26 +90,86 @@ class Event:
         if data:
             self.initialize_from_data(data) 
 
+        if data:
+            self.primary: Statistic = data.get('primary_attribute', Strength(random.randint(1, 10)))
+            self.secondary: Statistic = data.get('secondary_attribute', Dexterity(random.randint(1, 10)))
+            self.prompt_text = data.get('prompt_text', "Default prompt text")
+            self.pass_ = data.get('pass', {"message": "You passed."})
+            self.fail = data.get('fail', {"message": "You failed."})
+            self.partial_pass = data.get('partial_pass', {"message": "You partially passed."})
+        else:
+            self.primary: Statistic = Strength(random.randint(1, 10))
+            self.secondary: Statistic = Dexterity(random.randint(1, 10))
+            self.prompt_text = "Default prompt text"
+            self.pass_ = {"message": "You passed."}
+            self.fail = {"message": "You failed."}
+            self.partial_pass = {"message": "You partially passed."}
+
+        self.status = EventStatus.UNKNOWN
+        self.fail = {
+                "message": "You failed."
+            }
+        self.pass_ = {
+                "message": "You passed."
+            }
+        self.partial_pass = {
+                "message": "You partially passed."
+            }
+        self.prompt_text = "Thanos appears! Prepare to attack."
+
     def initialize_from_data(self, data: dict):
         self.choices = data.get('choices', [])
 
-
-    def execute(self, party):
-        chosen_one = self.parser.select_party_member(party)
-        chosen_skill = self.parser.select_skill(chosen_one)
-        self.resolve_status(chosen_skill )    
-        pass
+    def get(self, attribute_name):
+        # Check if the attribute exists and return its value
+        if hasattr(self, attribute_name):
+            return getattr(self, attribute_name)
+        else:
+            return None  # Return None if attribute doesn't exist
 
     def set_status(self, status: EventStatus):
         if status is None:
             return
         self.status = status
 
-    def resolve_status(self):
-        # Placeholder logic for resolving event status
-        pass
+def resolve_choice(self, party, character, chosen_skill):
+        # check if the skill attributes overlap with the event attributes
+        # if they don't overlap, the character fails
+        # if one overlap, the character partially passes
+        # if they do overlap, the character passes
+        # Get the attributes of the chosen skill
+        skill_attributes = chosen_skill.attributes
+        
+        # Get the attributes of the event
+        event_attributes = {
+            "primary": self.primary,
+            "secondary": self.secondary,
+            # Add other attributes here
+        }
+        
+        # Check if any skill attribute overlaps with event attributes
+        overlap = False
+        for attribute in skill_attributes:
+            if attribute in event_attributes.values():
+                overlap = True
+                break
+        
+        # Resolve the outcome based on overlap
+        if not overlap:
+            self.set_status(EventStatus.FAIL)
+        elif overlap and len(set(skill_attributes) & set(event_attributes.values())) == 1:
+            self.set_status(EventStatus.PARTIAL_PASS)
+        else:
+            self.set_status(EventStatus.PASS)
+def execute(self, party):
+    chosen_one = self.parser.select_party_member(party)
+    chosen_skill = self.parser.select_skill(chosen_one)
+    self.resolve_choice()    
+    pass
 
 parser = EventParser()
+
+
 
 event_data = {
     'prompt_text': "The fate of the universe hangs in the balance. What will you do?",

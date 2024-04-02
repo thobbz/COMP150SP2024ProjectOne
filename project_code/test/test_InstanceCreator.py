@@ -1,16 +1,17 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from project_code.src.instancecreator import InstanceCreator
-from project_code.src.userfactory import UserFactory
-from project_code.src.userinputparser import UserInputParser
-from project_code.src.user import User
-from project_code.src.event import Event, EventStatus
+from project_code.src.user_code.user_model import User
+from project_code.src.user_code.user_model import UserFactory        
+from project_code.src.utils.parser import UserInputParser
+from project_code.src.core.instancecreator import InstanceCreator
+from project_code.src.user_code.user_model import User
+from project_code.src.core.event import Event, EventStatus
 from project_code.src.eventparser import EventParser
-from project_code.src.location import Location
-from project_code.src.character import Character
-from project_code.src.statistic import Statistic
+from project_code.src.core.location import Location
+from project_code.src.core.character import Character
+from project_code.src.common.statistic import Statistic
 from project_code.src.skill import Skill
-from project_code.src.game import Game
+from project_code.src.core.game import Game
 from project_code.src.main import start_game
 import json
 import os
@@ -142,7 +143,7 @@ class TestLocationMethods(unittest.TestCase):
 
     def test_get_event(self):
         # Test getting an event from the location
-        event = self.location.get_event()
+        event = self.location.get_event(0)
         self.assertIsNotNone(event)
         self.assertIsInstance(event, Event)
 
@@ -157,25 +158,25 @@ class TestUserMethods(unittest.TestCase):
         self.user_factory = UserFactory()
         self.instance_creator = InstanceCreator(self.user_factory, self.parser)
 
-    def test_start_game_new_user(self):
-        # Mock user input to simulate starting a new game with a new user
-        with patch('builtins.input', side_effect=['yes', 'NewUser', 'Password']):
-            game_instance = start_game()
+def test_start_game_new_user(self):
+    # Mock user input to simulate starting a new game with a new user
+    with patch('builtins.input', side_effect=['yes', 'NewUser', 'Password']):
+        game_instance = start_game()
 
-        # Check if a new user is created and the game is started
-        self.assertIsNotNone(game_instance)
-        self.assertTrue(isinstance(game_instance, Game))
-        self.assertTrue(game_instance.continue_playing)
+    # Check if a new user is created and the game is started
+    self.assertIsNotNone(game_instance)
+    self.assertTrue(isinstance(game_instance, Game))
+    self.assertTrue(game_instance.continue_playing)
 
-    def test_start_game_existing_user(self):
-        # Mock user input to simulate starting a new game with an existing user
-        with patch('builtins.input', side_effect=['no', 'yes']):
-            game_instance = start_game()
+def test_start_game_existing_user(self):
+    # Mock user input to simulate starting a new game with an existing user
+    with patch('builtins.input', side_effect=['no', 'yes']):
+        game_instance = start_game()
 
-        # Check if an existing user is loaded and the game is started
-        self.assertIsNotNone(game_instance)
-        self.assertTrue(isinstance(game_instance, Game))
-        self.assertTrue(game_instance.continue_playing)
+    # Check if an existing user is loaded and the game is started
+    self.assertIsNotNone(game_instance)
+    self.assertTrue(isinstance(game_instance, Game))
+    self.assertTrue(game_instance.continue_playing)
 
     def test_save_game(self):
         # Create a mock game state to save
@@ -185,7 +186,7 @@ class TestUserMethods(unittest.TestCase):
         user = User(self.parser, "TestUser", "Password")
 
         # Call the save_game method
-        user.save_game(game_state)
+        user.save_game()
 
         # Check if the game state file is created
         file_path = "TestUser_game_state.json"

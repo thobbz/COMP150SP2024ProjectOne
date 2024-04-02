@@ -1,12 +1,8 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from project_code.src.common.statistic import Statistic, Strength, Dexterity, Constitution, Vitality, Endurance, Intelligence, Wisdom, Knowledge, Willpower, Spirit
+from project_code.src.common.statistic import *
+import random
 
 class Character:
-     
+
     def __init__(self, name: str = "", character_type: str = ""):
 
         self.name = self._generate_name() if name is None else name
@@ -490,3 +486,4 @@ def create_character():
     character_list = []
     random_character = Character()
     character_list.append(Character())
+
