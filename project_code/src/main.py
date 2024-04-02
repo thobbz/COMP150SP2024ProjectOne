@@ -49,13 +49,13 @@ def start_game():
             response = game_instance.start_game()
             if response == "Save and quit":
                 user.save_game()
-                print("Game saved. Goodbye!")
+                print("Timeline stabilized. Farewell heroes!")
                 sys.exit()
             elif response:
                 print("Goodbye!")
                 sys.exit()
     else:
-        print("See you next time!")
+        print("Whatever it takes...we'll see each other again.")
         sys.exit()
 
 if __name__ == '__main__':
