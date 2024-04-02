@@ -1,9 +1,8 @@
-# main.py
-from project_code.test.Project_One_Code import *
-from project_code.src.UserInputParser import UserInputParser
-from project_code.src.InstanceCreator import InstanceCreator
-from project_code.src.UserFactory import UserFactory
-import sys  
+import sys
+import os
+from user_input_parser import UserInputParser
+from user_factory import UserFactory
+from instance_creator import InstanceCreator
 
 
 

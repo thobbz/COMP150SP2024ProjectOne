@@ -293,6 +293,39 @@ class UserInputParser:
         response: str = input(prompt)
         return response
 
+    def select_party_member(self, party):
+        print("Select a party member:")
+        for i, member in enumerate(party, start=1):
+            print(f"{i}. {member.name}")
+
+        while True:
+            choice = self.parse("Enter the number of your choice: ")
+            try:
+                choice = int(choice)
+                if 1 <= choice <= len(party):
+                    return party[choice - 1]
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+    def select_skill(self, character):
+        skills = character.skills  # Assuming there is a 'skills' attribute in the Character class
+        print(f"Select a skill for {character.name}:")
+        for i, skill in enumerate(skills, start=1):
+            print(f"{i}. {skill.name}")
+
+        while True:
+            choice = self.parse("Enter the number of your choice: ")
+            try:
+                choice = int(choice)
+                if 1 <= choice <= len(skills):
+                    return skills[choice - 1]
+                else:
+                    print("Invalid choice. Please try again.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
 
 
 class UserFactory:
@@ -320,46 +353,63 @@ class InstanceCreator:
         else:
             return self.user_factory.create_user(self.parser)
 
-    def get_user_info(self, response: str) -> User | None:
+    def get_user_info(self, response: str) -> User:
         if "yes" in response:
             return self._new_user_or_login()
         else:
             return None
 
-    def _load_user(self) -> User:
-        username = self.parser.parse("Enter your username:")
-      
-        if username in self.user_factory.users:
-            return self.user_factory.users[username]
-        else:
-            print("User not found. Please try again or create a new account.")
+    def _load_user(self, username: str) -> User:
+        try:
+            with open(f"{username}_game_state.json", "r") as file:
+                game_state = json.load(file)
+            return User(self.parser, username=username, password="", legacy_points=game_state["legacy_points"])
+        except FileNotFoundError:
+            print("User data not found. Creating a new user.")
             return None
-    
+        
+
         pass
 
 
-    def start_game():
-        parser = UserInputParser()
-        user_factory = UserFactory()
-        instance_creator = InstanceCreator(user_factory, parser)
+    def start_game(self):
+    parser = UserInputParser()
+    user_factory = UserFactory()
+    instance_creator = InstanceCreator(user_factory, parser)
 
-        response = parser.parse("Would you like to start a new game? (yes/no)")
-        print(f"Response: {response}")
-        user = instance_creator.get_user_info(response)
-        if user is not None:
-            game_instance = user.current_game
-            if game_instance is not None:
-                response = game_instance.start_game()
+    response = parser.parse("Would you like to start a new game? (yes/no)")
+    introduction = (f"The Mad Titan's wake of destruction has left the universe in ruins.\n"
+                f"Thanos, drunk on power after finally collecting all six Infinity Stones,\n"
+                f"has used their combined might to reshape reality itself to his twisted vision.\n"
+                f"Planets have been turned to dust, civilizations erased in an instant.\n\n"
+                f"Those who remain are a scattered few - the last survivors of Thanos' genocidal rebalancing.\n"
+                f"The few heroes left, those who dared to oppose his insane crusade, have regrouped and gone into hiding.\n"
+                f"All seems lost against such unspeakable power. The Infinity Stones, once the universe's most dangerous weapons when split apart,\n"
+                f"are now united as one under Thanos' iron grip.\n\n"
+                f"But a rally cry has sounded from the ashes. A band of unlikely fighters has pledged to undertake an inconceivable mission -\n"
+                f"to infiltrate Thanos' impregnable fortress, overpower his elite forces, and wrestle the Infinity Stones from his grasp.\n"
+                f"Outnumbered and outmatched, this ragtag squad of the universe's last defenders has pinned their hopes on one desperate objective:\n"
+                f"To reverse the snap that decimated all life and stop the Mad Titan's reign before he remakes the cosmos in his nightmarish image.\n\n"
+                f"The risks are immeasurable, the costs invaluable. But without betting it all, there is no chance of victory...\n"
+                f"and no future across the entire universe. The time to rally has come at last!")
+    
+    print(introduction)
+    print(f"Response: {response}")
+    user = instance_creator.get_user_info(response)
+    if user is not None:
+        game_instance = user.current_game
+        if game_instance is not None:
+            response = game_instance.start_game()
             if response == "Save and quit":
                 user.save_game()
-                print("Game saved. Goodbye!")
+                print("Timeline stabilized. Farewell heroes!")
                 sys.exit()
             elif response:
                 print("Goodbye!")
                 sys.exit()
-        else:
-            print("See you next time!")
-            sys.exit()
+    else:
+        print("Whatever it takes...we'll see each other again.")
+        sys.exit()
 
-    if __name__ == '__main__':
-        start_game()
+if __name__ == '__main__':
+    start_game()
