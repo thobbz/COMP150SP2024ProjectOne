@@ -4,9 +4,10 @@ project_code_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 sys.path.append(project_code_dir)
 
 from core.game import Game
+from utils.userinputparser import UserInputParser
 from user_code.user_model import UserFactory
 from core.instancecreator import InstanceCreator
-from utils.userinputparser import UserInputParser
+
 
 
 
