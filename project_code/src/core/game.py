@@ -4,7 +4,7 @@ import os
 
 
 from typing import List
-from character import Character
+from project_code.src.core.character import Character
 from .event import Event, EventStatus
 from ..eventparser import EventParser
 from .location import Location
