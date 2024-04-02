@@ -4,8 +4,6 @@ import random
 from project_code.src.core.event import Event#import Event class from Event.py
 from project_code.src.eventparser import EventParser#import EventParser class from EventParser.py
 from project_code.src.common.statistic import Statistic, Strength, Dexterity, Spirit, Willpower, Knowledge, Wisdom, Intelligence, Endurance, Vitality, Constitution
-from project_code.src.core.event import Event #import Event class from Event.py
-from project_code.src.eventparser import EventParser #import EventParser class from EventParser.py
 
 
 
