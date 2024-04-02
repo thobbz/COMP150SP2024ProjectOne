@@ -1,28 +1,21 @@
 import sys
 import os
-import sys
-import os
 
 # Add the project's root directory to the system path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
-from project_code.src.user_code.user_model import User
 from project_code.src.utils.parser import UserInputParser
 from project_code.src.core.instancecreator import InstanceCreator
 from project_code.src.user_code.user_model import UserFactory
 from project_code.src.core.game import Game
 
-import sys
-import os
 
 # main.py
-from project_code.src.user_code.user_model import User
 from project_code.src.user_code.user_model import UserFactory   
 from project_code.src.core.instancecreator import InstanceCreator     
 from project_code.src.utils.parser import UserInputParser
 from project_code.src.core.game import Game
-import sys  
 
 
 
