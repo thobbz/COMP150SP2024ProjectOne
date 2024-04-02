@@ -13,11 +13,12 @@ Welcome to the Avengers Legacy Game! This is a text-based adventure game where y
 1. Run the game by executing the `main.py` file using Python.
 2. The game will prompt you to either create a new user or log in to an existing account. Follow the instructions to enter a username and password.
 3. If you are starting a new game, you will be asked to select a character from the available Avengers team members.
-4. The game will present you with different locations and events. Read the descriptions carefully and choose your actions from the available options.
-5. Each choice you make will have an impact on the outcome of the game. Your character's attributes (strength, dexterity, intelligence, etc.) will determine the success or failure of certain actions.
-6. As you progress through the game, you will earn legacy points based on your performance. These points can be used to enhance your character's abilities in future playthroughs.
-7. The goal of the game is to make the right choices and successfully defeat Thanos to save the universe.
-8. If you choose to quit the game at any point, your progress will be automatically saved, and you can resume from where you left off the next time you play.
+4. You are also prompted to create a random character with random attributes which can be selected from the party.
+5. The game will present you with different locations and events. Read the descriptions carefully and choose your actions from the available options.
+6. Each choice you make will have an impact on the outcome of the game. Your character's attributes (strength, dexterity, intelligence, etc.) will determine the success or failure of certain actions.
+7. As you progress through the game, you will earn legacy points based on your performance. These points can be used to enhance your character's abilities in future playthroughs.
+8. The goal of the game is to make the right choices and successfully defeat Thanos to save the universe.
+9. If you choose to quit the game at any point, your progress will be automatically saved, and you can resume from where you left off the next time you play.
 
 ## Game Files
 
