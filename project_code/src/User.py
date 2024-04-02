@@ -1,10 +1,12 @@
 # User.py
 import json
 from project_code.src.game import Game
+from project_code.src.userinputparser import UserInputParser
 
 class User:
 
     def __init__(self, input, username: str, password: str, legacy_points: int = 0):
+        self.parser = UserInputParser
         self.username = username
         self.password = password
         self.legacy_points = legacy_points

@@ -1,5 +1,8 @@
 import random
 
+class Skill:
+    def __init__(self, attributes: int):
+        self.attributes = attributes
 
 class Statistic:
     def __init__(self, legacy_points: int):

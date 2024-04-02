@@ -1,6 +1,7 @@
 import json
-from project_code.src.event import Event, EventParser #import Event class from Event.py
-
+import random
+from project_code.src.event import Event#import Event class from Event.py
+from project_code.src.eventparser import EventParser#import EventParser class from EventParser.py
 
 class Location:
     def __init__(self, parser: EventParser, number_of_events: int = 1):
@@ -24,6 +25,9 @@ class Location:
             event.fail_text = event_data.get('fail', {})
             event.partial_pass_result = event_data.get('partial_pass', {})
             self.events.append(event)
+
+    def get_event(self) -> Event:
+        return self.events.pop(0)
     
     pass
 
