@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from project_code.src.common.statistic import Statistic, Strength, Dexterity, Constitution, Vitality, Endurance, Intelligence, Wisdom, Knowledge, Willpower, Spirit
+from statistic import Statistic, Strength, Dexterity, Constitution, Vitality, Endurance, Intelligence, Wisdom, Knowledge, Willpower, Spirit
 
 class Character:
      

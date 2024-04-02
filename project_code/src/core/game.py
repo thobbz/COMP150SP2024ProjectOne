@@ -4,11 +4,11 @@ import os
 
 
 from typing import List
-from project_code.src.core.character import Character
-from project_code.src.core.event import Event, EventStatus
-from project_code.src.eventparser import EventParser
-from project_code.src.core.location import Location
-from project_code.src.core.locationparser import LocationParser
+from character import Character
+from .event import Event, EventStatus
+from ..eventparser import EventParser
+from .location import Location
+from .locationparser import LocationParser
 
 class Game:
 

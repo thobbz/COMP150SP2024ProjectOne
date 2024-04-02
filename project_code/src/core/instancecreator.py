@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from project_code.src.user_code.user_model import User
 from project_code.src.user_code.user_model import UserFactory        
-from project_code.src.utils.parser import UserInputParser
+from userinputparser import UserInputParser
 
 
 

@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import MagicMock, patch
 from project_code.src.user_code.user_model import User
 from project_code.src.user_code.user_model import UserFactory        
-from project_code.src.utils.parser import UserInputParser
+from userinputparser import UserInputParser
 from project_code.src.core.instancecreator import InstanceCreator
 from project_code.src.user_code.user_model import User
 from project_code.src.core.event import Event, EventStatus, EventParser

@@ -2,13 +2,13 @@ import json
 import getpass
 import sys
 import os
-from project_code.src.utils.parser import UserInputParser
+from userinputparser import UserInputParser
 
 # Add the project's root directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from project_code.src.core.game import Game
-from project_code.src.utils.parser import UserInputParser
+from userinputparser import UserInputParser
 class User:
 
     def __init__(self, input, username: str, password: str, legacy_points: int = 0):
