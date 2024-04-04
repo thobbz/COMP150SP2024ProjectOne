@@ -1,14 +1,11 @@
 import json
-import sys
-import os
-
-
 from typing import List
+
 from project_code.src.core.character import Character
 from .event import Event, EventStatus
-from ..eventparser import EventParser
 from .location import Location
-from .locationparser import LocationParser
+from ..eventparser import EventParser
+
 
 class Game:
 
@@ -21,7 +18,6 @@ class Game:
         self.current_location = None
         self.current_event = None
         self._initialize_game()
-        
 
     def add_character(self, character: Character):
         """Add a character to the game."""
@@ -51,10 +47,9 @@ class Game:
         with open(file_path, 'r') as file:
             self.locations = json.load(file)
 
-    
     def load_events(self, file_path):
-            with open(file_path, 'r') as file:
-                self.events = json.load(file)
+        with open(file_path, 'r') as file:
+            self.events = json.load(file)
 
     def start_game(self):
         return self._main_game_loop()
@@ -97,22 +92,18 @@ class Game:
             return "Save and quit"
         else:
             return False
-        
 
     def get_state(self) -> dict:
         """
         Returns the current state of the game as a dictionary.
         """
         state = {
-            "characters": [char.__dict__ for char in self.characters],
-            "locations": [loc.__dict__ for loc in self.locations],
-            "events": [event.__dict__ for event in self.events],
-            "party": [char.__dict__ for char in self.party],
-            "current_location": self.current_location.__dict__ if self.current_location else None,
-            "current_event": self.current_event.__dict__ if self.current_event else None,
+            "characters": [char for char in self.characters],
+            "locations": [loc for loc in self.locations],
+            "events": [event for event in self.events],
+            "party": [char for char in self.party],
+            "current_location": self.current_location if self.current_location else None,
+            "current_event": self.current_event if self.current_event else None,
             "continue_playing": self.continue_playing
         }
         return state
-
-
-

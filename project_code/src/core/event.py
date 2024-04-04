@@ -1,13 +1,12 @@
-import sys
 import os
 import random
+import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from typing import List
 from enum import Enum
-from project_code.src.core.event import EventParser    #import EventParser class from EventParser.py
-from project_code.src.common.statistic import Statistic, Strength, Dexterity, Spirit, Willpower, Knowledge, Wisdom, Intelligence, Endurance, Vitality, Constitution
+from project_code.src.common.statistic import Statistic, Strength, Dexterity
 
 
 class EventStatus(Enum):
@@ -15,7 +14,6 @@ class EventStatus(Enum):
     FAIL = "FAIL"
     PASS = "PASS"
     PARTIAL_PASS = "PARTIAL_PASS"
-
 
 
 class EventParser:
@@ -29,7 +27,7 @@ class EventParser:
             print(f"{i}. {choice}")
         choice_index = self.get_choice_input(event.choices)
         return event.choices[choice_index - 1]
-    
+
     def get_choice_input(self, choices: List[str]) -> int:
         while True:
             try:
@@ -96,7 +94,7 @@ class Event:
         self.partial_pass_result = ""
 
         if data:
-            self.initialize_from_data(data) 
+            self.initialize_from_data(data)
 
         if data:
             self.primary: Statistic = data.get('primary_attribute', Strength(random.randint(1, 10)))
@@ -115,20 +113,18 @@ class Event:
 
         self.status = EventStatus.UNKNOWN
         self.fail = {
-                "message": "You failed."
-            }
+            "message": "You failed."
+        }
         self.pass_ = {
-                "message": "You passed."
-            }
+            "message": "You passed."
+        }
         self.partial_pass = {
-                "message": "You partially passed."
-            }
+            "message": "You partially passed."
+        }
         self.prompt_text = "Thanos appears! Prepare to attack."
 
     def initialize_from_data(self, data: dict):
         self.choices = data.get('choices', [])
-
-
 
     def get(self, attribute_name):
         # Check if the attribute exists and return its value
@@ -136,7 +132,6 @@ class Event:
             return getattr(self, attribute_name)
         else:
             return None  # Return None if attribute doesn't exist
-
 
     def set_status(self, status: EventStatus = EventStatus.UNKNOWN):
         self.status = status
@@ -149,21 +144,21 @@ class Event:
         # if they do overlap, the character passes
         # Get the attributes of the chosen skill
         skill_attributes = chosen_skill.attributes
-        
+
         # Get the attributes of the event
         event_attributes = {
             "primary": self.primary,
             "secondary": self.secondary,
             # Add other attributes here
         }
-        
+
         # Check if any skill attribute overlaps with event attributes
         overlap = False
         for attribute in skill_attributes:
             if attribute in event_attributes.values():
                 overlap = True
                 break
-        
+
         # Resolve the outcome based on overlap
         if not overlap:
             self.set_status(EventStatus.FAIL)
@@ -178,21 +173,21 @@ class Event:
             # if they do overlap, the character passes
             # Get the attributes of the chosen skill
             skill_attributes = chosen_skill.attributes
-            
+
             # Get the attributes of the event
             event_attributes = {
                 "primary": self.primary,
                 "secondary": self.secondary,
                 # Add other attributes here
             }
-            
+
             # Check if any skill attribute overlaps with event attributes
             overlap = False
             for attribute in skill_attributes:
                 if attribute in event_attributes.values():
                     overlap = True
                     break
-            
+
             # Resolve the outcome based on overlap
             if not overlap:
                 self.set_status(EventStatus.FAIL)
@@ -200,16 +195,15 @@ class Event:
                 self.set_status(EventStatus.PARTIAL_PASS)
             else:
                 self.set_status(EventStatus.PASS)
+
     def execute(self, party):
         chosen_one = self.parser.select_party_member(party)
         chosen_skill = self.parser.select_skill(chosen_one)
-        self.resolve_choice(self, party, chosen_skill)    
+        self.resolve_choice(self, party, chosen_skill)
         pass
 
+
 parser = EventParser()
-
-
-
 
 event_data = {
     'prompt_text': "The fate of the universe hangs in the balance. What will you do?",
